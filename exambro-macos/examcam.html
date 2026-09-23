@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>ExamCam</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Tahoma, sans-serif;
+      background: #000;
+      border: 1px solid #005a9e;
+    }
+    #header {
+      width: 100%;
+      height: 38px;
+      background: #0078d4;
+      display: flex;
+      align-items: center;
+      padding: 0 6px;
+      gap: 8px;
+      color: #fff;
+      -webkit-app-region: drag;
+    }
+    #btnToggle {
+      -webkit-app-region: no-drag;
+      width: 28px;
+      height: 28px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.15s;
+    }
+    #btnToggle:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    #btnToggle img {
+      width: 14px;
+      height: 14px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      transition: transform 0.2s ease;
+    }
+    #btnToggle.collapsed img {
+      transform: rotate(180deg);
+    }
+    #title {
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #rec-dot {
+      width: 8px;
+      height: 8px;
+      background: #28a745;
+      border-radius: 50%;
+      margin-right: 4px;
+      box-shadow: 0 0 6px #28a745;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    #video-container {
+      width: 100%;
+      height: calc(100% - 38px);
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scaleX(-1);
+    }
+    #cam-error {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: #1e1e1e;
+      color: #ff6b6b;
+      font-size: 11px;
+      text-align: center;
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <button id="btnToggle" type="button" title="Minimize/Maximize">
+      <img src="launcher/assets/botarrow3.png" alt="Toggle" />
+    </button>
+    <div id="rec-dot"></div>
+    <div id="title">ExamCam</div>
+  </div>
+
+  <div id="video-container">
+    <video id="camVideo" autoplay playsinline muted></video>
+    <div id="cam-error">Kamera tidak aktif atau izin ditolak</div>
+  </div>
+
+  <canvas id="snapshotCanvas" style="display: none;"></canvas>
+
+  <script>
+    const electron = require('electron');
+    const { ipcRenderer } = electron;
+
+    const btnToggle = document.getElementById('btnToggle');
+    const video = document.getElementById('camVideo');
+    const errBox = document.getElementById('cam-error');
+    let isCollapsed = false;
+
+    btnToggle.addEventListener('click', () => {
+      isCollapsed = !isCollapsed;
+      btnToggle.classList.toggle('collapsed', isCollapsed);
+      ipcRenderer.send('examcam-toggle-collapse', isCollapsed);
+    });
+
+    async function initCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            width: { ideal: 640 },
+            height: { ideal: 480 },
+            facingMode: 'user'
+          },
+          audio: false
+        });
+        video.srcObject = stream;
+        errBox.style.display = 'none';
+      } catch (err) {
+        console.error('Camera access failed:', err);
+        errBox.textContent = 'Kamera tidak terdeteksi: ' + (err.message || err.name);
+        errBox.style.display = 'flex';
+      }
+    }
+
+    initCamera();
+  </script>
+</body>
+</html>

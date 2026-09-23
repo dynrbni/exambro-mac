@@ -1,0 +1,42 @@
+{
+  "name": "exambrowser-macos",
+  "version": "26.0222",
+  "description": "ExamBrowser untuk macOS - Pusmenjar Kemdikbud",
+  "main": "launcher.js",
+  "scripts": {
+    "start": "electron .",
+    "start:daring": "electron . dummy https://anbk-layanan.pusmendik.kemdikbud.go.id/Account/",
+    "start:semidaring": "electron . dummy https://anbk-layanan.pusmendik.kemdikbud.go.id/Account/",
+    "pack": "electron-builder --mac",
+    "dist": "electron-builder --mac --publish never"
+  },
+  "author": "Fijar Hafiizh",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^28.3.3",
+    "electron-builder": "^24.9.1"
+  },
+  "dependencies": {
+    "electron-log": "^5.1.0",
+    "node-datetime": "^2.1.2"
+  },
+  "build": {
+    "appId": "id.go.kemdikbud.exambrowser",
+    "productName": "ExamBrowser",
+    "mac": {
+      "category": "public.app-category.education",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "hardenedRuntime": false
+    },
+    "files": [
+      "**/*",
+      "!node_modules/.cache"
+    ]
+  },
+  "allowScripts": {
+    "electron@28.3.3": true
+  }
+}

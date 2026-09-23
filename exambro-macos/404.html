@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Error - This Isn't Working!</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+</head>
+<body>
+    <div class="container">
+        <img class="ops" width="500px" src="./assets/images/404.png" />
+        <br />
+        <h1 id="datacode"></h1>
+        <h5 id="datadesc"></h5>
+        <h3>Halaman yang Anda cari mengalami gangguan.
+            <br /> Hal tersebut bisa dikarenakan gangguan jaringan internet atau gangguan ke server pusat.
+            <br /> Silakan mengklik tombol refresh dengan menekan F5 atau Ctrl+Shift+R
+            <br /> Jika menekan refresh tidak bisa, silakan keluar dengan menekan tombol kombinasi exit exambro CTRL+C+B.</h3>
+        <br />
+    </div>
+    <script>
+        let query = window.location.search;
+        let hasil_split = query.split("=");
+        let pisah_query = hasil_split[1].split("__");
+        document.getElementById("datacode").innerHTML = pisah_query[0];
+        document.getElementById("datadesc").innerHTML = pisah_query[1];
+    </script>
+</body>
+</html>

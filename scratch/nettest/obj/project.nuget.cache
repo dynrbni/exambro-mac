@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "a3zaHkRSMWA=",
+  "success": true,
+  "projectFilePath": "/Users/dyn/Documents/Coding/Project/exambro-mac/scratch/nettest/nettest.csproj",
+  "expectedPackageFiles": [
+    "/Users/dyn/.nuget/packages/dnlib/4.5.0/dnlib.4.5.0.nupkg.sha512",
+    "/Users/dyn/.nuget/packages/system.configuration.configurationmanager/10.0.12/system.configuration.configurationmanager.10.0.12.nupkg.sha512",
+    "/Users/dyn/.nuget/packages/system.diagnostics.eventlog/10.0.12/system.diagnostics.eventlog.10.0.12.nupkg.sha512",
+    "/Users/dyn/.nuget/packages/system.security.cryptography.protecteddata/10.0.12/system.security.cryptography.protecteddata.10.0.12.nupkg.sha512",
+    "/Users/dyn/.nuget/packages/system.security.permissions/10.0.12/system.security.permissions.10.0.12.nupkg.sha512",
+    "/Users/dyn/.nuget/packages/system.windows.extensions/10.0.12/system.windows.extensions.10.0.12.nupkg.sha512",
+    "/Users/dyn/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.26/microsoft.aspnetcore.app.ref.8.0.26.nupkg.sha512",
+    "/Users/dyn/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.26/microsoft.netcore.app.host.osx-arm64.8.0.26.nupkg.sha512",
+    "/Users/dyn/.nuget/packages/microsoft.netcore.app.ref/8.0.26/microsoft.netcore.app.ref.8.0.26.nupkg.sha512"
+  ],
+  "logs": []
+}

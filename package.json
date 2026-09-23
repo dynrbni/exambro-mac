@@ -1,0 +1,10 @@
+{
+  "name": "exambro-mac",
+  "version": "26.0222",
+  "description": "ExamBrowser macOS port",
+  "scripts": {
+    "start": "npm start --prefix exambro-macos",
+    "pack": "npm run pack --prefix exambro-macos",
+    "dist": "npm run dist --prefix exambro-macos"
+  }
+}
